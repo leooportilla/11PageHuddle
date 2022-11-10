@@ -1,0 +1,303 @@
+@font-face {
+    font-family: Poppins Regular;
+    src: url(../fonts/Poppins-Regular.ttf);
+}
+
+@font-face {
+    font-family: Poppins SemiBold;
+    src: url(../fonts/Poppins-SemiBold.ttf);
+}
+
+@font-face {
+    font-family: Open Sans Regular;
+    src: url(../fonts/OpenSans-Regular.ttf);
+}
+
+/* VARIABLE */
+// Colores primarios
+$Colores: (
+    "Violet": rgb(103, 75, 175),
+    "Soft Magenta": rgb(232, 130, 232),
+
+    // Colores adiccionales
+    "White": rgb(250, 250, 250, ),
+    "Black": rgb(0, 0, 0),
+);
+
+// Fonts
+$Fonts: (
+    "Poppins400": Poppins Regular,
+    "Poppins600": Poppins SemiBold,
+    "OpenSans": Open Sans Regular,
+);
+
+// Resolucion
+$Resolucion: (
+    "MovilSmall": 375px,
+    "MovilStandard": 480px,
+    "TabletSmall": 768px,
+    "TabletStandard": 960px,
+    "Laptop": 1024px,
+    "Desktop": 1328px,
+);
+
+/* Font Size */
+$FontSize: 15px;
+
+
+/* FUNCIONES */
+// Reponsive Desing
+@mixin Tablet ($resolucion : 960px) {
+    @media screen and (max-width: $resolucion) {
+        @content;
+    }
+}
+
+@mixin Movil ($resolucion : 480px) {
+    @media screen and (max-width: $resolucion) {
+        @content;
+    }
+}
+
+/* Normalize */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Pagina principal */
+body {
+    width: 100vw;
+    height: 100vh;
+    background-image: url(../images/desktop.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: map-get($Colores, "Violet");
+    font-size: $FontSize;
+    padding: 3em 5.3em;
+
+    & .main {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+        grid-template-areas: 
+        "Image Description"
+        "Icon Icon";
+
+        &__containerimage {
+            grid-area: Image;
+            margin-top: 7em;
+
+            &-image {
+                width: 100%;
+            }
+        }
+
+        &__description {
+            grid-area: Description;
+            display: flex;
+            flex-direction: column;
+            padding: 10em 8em;
+
+            &-title {
+                font-family: map-get($Fonts, "Poppins600");
+                color: map-get($Colores, "White");
+                font-size: 3.2em;
+                margin-bottom: 1em;
+            }
+
+            &-paragraph {
+                font-family: map-get($Fonts, "OpenSans");
+                color: map-get($Colores, "White");
+                font-size: 1.5em;  
+                line-height: 1.8;
+                opacity: 0.8;
+                margin-bottom: 1.5em;
+            }
+
+            &-button {
+                width: 40%;
+                padding: 1em 1em;
+                border-radius: 2.5em;
+                border: 0;
+                color: map-get($Colores, "Violet");
+                font-family: map-get($Fonts, "Poppins400");
+                font-size: 1.2em;
+                box-shadow: 10px 15px 50px -15px map-get($Colores, "Black");
+                cursor: pointer;
+
+                &:hover {
+                    background-color: map-get($Colores, "Soft Magenta");
+                    color: map-get($Colores, "White");
+                }
+            }
+        }
+
+        &__icon {
+            grid-area: Icon;
+            display: flex;
+            justify-content: end;
+            gap: 1em;
+
+            &-facebook {
+                width: 3.5em;
+                height: 3.5em;
+                background-image: url(../images/facebook__white.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                border: 1px solid map-get($Colores, "White");
+                border-radius: 50%;
+                cursor: pointer;
+
+                &:hover {
+                    background-image: url(../images/facebook__magenta.png);
+                    border: 1px solid map-get($Colores, "Soft Magenta");
+                }
+            }
+
+            &-twitter {
+                width: 3.5em;
+                height: 3.5em;
+                background-image: url(../images/twitter__white.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                border: 1px solid map-get($Colores, "White");
+                border-radius: 50%;
+                cursor: pointer;
+
+                &:hover {
+                    background-image: url(../images/twitter__magenta.png);
+                    border: 1px solid map-get($Colores, "Soft Magenta");
+                }
+            }
+
+            &-instagram {
+                width: 3.5em;
+                height: 3.5em;
+                background-image: url(../images/instagram__white.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                border: 1px solid map-get($Colores, "White");
+                border-radius: 50%;
+                cursor: pointer;
+
+                &:hover {
+                    background-image: url(../images/instagram__magenta.png);
+                    border: 1px solid map-get($Colores, "Soft Magenta");
+                }
+            }
+        }
+    }
+
+    /* Autores */
+    & .footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: map-get($Colores, "White");
+        font-family: map-get($Fonts, "Poppins600");
+        font-size: 1em;
+        margin-top: 2em;
+
+        &__atributos {
+            font-size: 1em;
+
+            &-enlace {
+                color: map-get($Colores, "White");
+                margin-left: 0.3em;
+                margin-right: 0.3em;
+            }
+        }
+    }
+}
+
+@include Movil (map-get($Resolucion, "MovilSmall")) {
+    body {
+        width: 100vw;
+        height: 50vh;
+        background-image: url(../images/mobile.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        padding: 3em;
+
+        & .header {
+            
+            &__logo {
+                width: 13em;
+            }
+        }
+    
+        & .main {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: repeat(3, auto);
+            grid-template-areas: 
+            "Image"
+            "Description"
+            "Icon";
+    
+            &__containerimage {
+                grid-area: Image;
+                margin-top: 5em;
+    
+                &-image {
+                    width: 100%;
+                }
+            }
+    
+            &__description {
+                grid-area: Description;
+                align-items: center;
+                padding: 0;
+    
+                &-title {
+                    text-align: center;
+                    font-size: 1.5em;
+                    margin-top: 2em;
+                }
+    
+                &-paragraph {
+                    text-align: center;
+                    font-size: 1em;  
+                    margin-bottom: 1.5em;
+                }
+    
+                &-button {
+                    width: 80%;
+                    padding: 0.5em;
+                    font-size: 1em;
+                    margin-bottom: 4em;
+                }
+            }
+    
+            &__icon {
+                grid-area: Icon;
+                justify-content: center;
+    
+                &-facebook {
+                    width: 2em;
+                    height: 2em;
+                    background-size: 0.9em;
+                }
+    
+                &-twitter {
+                    width: 2em;
+                    height: 2em;
+                    background-size: 0.9em;
+                }
+    
+                &-instagram {
+                    width: 2em;
+                    height: 2em;
+                    background-size: 0.9em;
+                }
+            }
+        }
+    
+        /* Autores */
+        & .footer {
+            font-size: 0.6em;
+        }
+    }
+}
